@@ -2,11 +2,13 @@
   <table class="table">
     <tr  class="panel-heading">
         <th>名前</th>
+        <th>年齢</th>
         <th>メッセージ</th>
     </tr>
     <% @messages.each do |message| %>
     <tr>
         <td><span class="label label-info"><%= message.name %></span></td>
+        <td><%= message.age %></td>
         <td><%= message.body %></td>
         <% #edit_message_path(message)は編集ページへのパス指定 %>
         <td><%= link_to "edit", edit_message_path(message),:class => "btn btn-warning" %></td>

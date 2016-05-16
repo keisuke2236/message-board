@@ -46,14 +46,14 @@ class MessagesController < ApplicationController
   
   def destroy
     @message.destroy
-    redirect_to root_path, notice:"#{@message.name}さんのメッセージ「#{@message.body}」を削除しました"
+    redirect_to root_path, notice:"#{@message.name}さん(#{@message.age})のメッセージ「#{@message.body}」を削除しました"
   end
   
   #入力内容の正規化　不正防止
   #送られてくる変数名をメソッド名に指定して params.reqire(:message).premit（：受け取りたいやつA：B）といった感じに書く
   private
   def message_params
-    params.require(:message).permit(:name,:body)
+    params.require(:message).permit(:name,:body,:age)
   end
   
   #edit と update処理の前に Messageオブジェクトの中から飛んできたparams[:id]のidで検索してあったらその値を@messageに入れる
