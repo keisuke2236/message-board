@@ -1,24 +1,24 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    メッセージ一覧
-  </div>
-    
-  <div class="panel-body">
+<div class="table-responsive panel panel-default">
+  <table class="table">
+    <tr  class="panel-heading">
+        <th>名前</th>
+        <th>メッセージ</th>
+    </tr>
     <% @messages.each do |message| %>
-      <span class="label label-info"><%= message.name %></span>
-      <%= message.body %>
-      <br>
+    <tr>
+        <td><span class="label label-info"><%= message.name %></span></td>
+        <td><%= message.body %></td>
+    </tr>
     <% end %>
-  </div>
+  </table>
 </div>
-
 
 <%# form_forには do |f|〜ENDまでの内容が全て送信される %>
 <%= form_for(@message) do |f| %>
 名前：
-<%= f.text_field :name %>
+<%= f.text_field:name %>
 内容
-<%= f.text_field :body %>
+<%= f.text_area :body %>
 <%= f.submit %>
 <% end %>
 

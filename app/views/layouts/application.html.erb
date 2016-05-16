@@ -11,10 +11,14 @@
     <nav class="navbar">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Message Board</a>
+        <a class="menu btn btn-primary" href="/">Message Board</a>
+        <a class="menu btn btn-success" href="messages/new">New Message</a>
+        <a class="menu btn btn-warning" href="messages/edit">Edit</a>
+        <a class="menu btn btn-info" href="messages/show">Show</a>
       </div>
     </div>
   </nav>
+  <hr>
   <div class="container">
     <%= yield %>
   </div>
