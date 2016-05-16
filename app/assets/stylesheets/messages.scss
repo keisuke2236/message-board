@@ -1,5 +1,8 @@
-.button1 {
-    float: right;
+//エラーが発生した時のイベントを取得してCSS適応することができる
+.field_with_errors{
+  display: inline-block;
+  border: 1px solid #f00;
+  width: 100%;
 }
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.

@@ -15,12 +15,18 @@ class MessagesController < ApplicationController
     @messages = Message.all
   end
   
+  
   def create
     #                     モデル名の小文字_paramsで引数を受け取ることができる
     @message = Message.new(message_params)
-    @message.save
-    #ここでさっきのヘルパを利用しているのですね
-    redirect_to root_path , notice: 'メッセージを保存しました'
+    if @message.save
+      #ここでさっきのヘルパを利用しているのですね
+      redirect_to root_path , notice: 'メッセージを保存しました'
+    else
+      @messages = Message.all
+      flash.now[:alert] = "メッセージの保存に失敗しました。"
+      render 'index'
+    end
   end
   
   
