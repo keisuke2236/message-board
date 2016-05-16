@@ -8,6 +8,10 @@
     <tr>
         <td><span class="label label-info"><%= message.name %></span></td>
         <td><%= message.body %></td>
+        <% #edit_message_path(message)は編集ページへのパス指定 %>
+        <td><%= link_to "edit", edit_message_path(message),:class => "btn btn-warning" %></td>
+        <% #             削除へリンク　メッセージコントローラーのデリートメソッドへ　一応確認をする  %>
+        <td><%= link_to "destroy" , message , method: :delete, data: { confirm: '削除してもよろしいですか？' },:class => "btn btn-danger" %></td>
     </tr>
     <% end %>
   </table>

@@ -1,5 +1,7 @@
 #ActionController::BaseのサブクラスであるMessagesControllerである　クラスの継承してますねこれ
 class MessagesController < ApplicationController
+  #フィルタを用いてedit と updateを行う前にset_messageを行うように記述する
+  before_action :set_message, only: [:edit, :update,:destroy]
   #indexというアクションに対応した処理を書くことができる（これメソッドだったんだ笑）
   def index
     #おおわかるぞ，このクラスのクラスインスタンスmessageを定義してMessageクラスはあらかじめ作ってあるのだな
@@ -15,7 +17,11 @@ class MessagesController < ApplicationController
     @messages = Message.all
   end
   
+  def edit
+  end
   
+
+
   def create
     #                     モデル名の小文字_paramsで引数を受け取ることができる
     @message = Message.new(message_params)
@@ -29,6 +35,19 @@ class MessagesController < ApplicationController
     end
   end
   
+  def update
+    if @message.update(message_params)
+      #root_pathは予約変数みたいなものだからダブルクオーとしてはいけない（戒め
+      redirect_to root_path , notice: 'メッセージを編集しました'
+    else
+      render 'edit'
+    end
+  end
+  
+  def destroy
+    @message.destroy
+    redirect_to root_path, notice:"#{@message.name}さんのメッセージ「#{@message.body}」を削除しました"
+  end
   
   #入力内容の正規化　不正防止
   #送られてくる変数名をメソッド名に指定して params.reqire(:message).premit（：受け取りたいやつA：B）といった感じに書く
@@ -36,4 +55,11 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:name,:body)
   end
+  
+  #edit と update処理の前に Messageオブジェクトの中から飛んできたparams[:id]のidで検索してあったらその値を@messageに入れる
+  def set_message
+    @message = Message.find(params[:id])
+  end
+  
+  
 end

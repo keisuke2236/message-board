@@ -10,6 +10,12 @@
 <body>
     <nav class="navbar">
     <div class="container">
+    <% #注意書きがあるときは表示する %>
+    <% if notice %>
+      <div class="alert alert-info">
+        <%= notice %>
+      </div>
+    <% end %>
       <div class="navbar-header">
         <a class="menu btn btn-primary" href="/">Message Board</a>
         <a class="menu btn btn-success" href="messages/new">New Message</a>
